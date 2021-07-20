@@ -1,24 +1,39 @@
-import logo from './logo.svg';
+import { Link, Switch, Route, Redirect } from 'react-router-dom';
 import './App.css';
+import ContactList from './pages/ContactList';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/contacts">Список контактов</Link>
+          </li>
+          <li>
+            <Link to="/fields">Список полей</Link>
+          </li>
+        </ul>
+      </nav>
+
+      <Switch>
+        <Route path="/contacts" exact component={ContactList} />
+        <Route path="/contacts/add">
+          Форма добавления контакта
+        </Route>
+        <Route path="/contacts/edit/:contactId">
+          Форма редактирования контакта
+        </Route>
+
+        <Route path="/fields">
+          Field list component
+        </Route>
+
+        <Route path="/" exact>
+          <Redirect to="/contacts" />
+        </Route>
+      </Switch>
+    </>
   );
 }
 
